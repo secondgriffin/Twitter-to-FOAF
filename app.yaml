@@ -1,0 +1,23 @@
+application: twitter2foaf
+version: 2
+runtime: python
+api_version: 1
+
+handlers:
+- url: /
+  static_files: home.html
+  upload: home.html
+  expiration: "1d"
+- url: /about
+  static_files: about.html
+  upload: about.html
+  expiration: "1d"
+
+- url: /data/.*
+  script: /foaf.py
+- url: /id/.*
+  script: /foaf.py
+- url: /user/.*
+  script: /foaf.py
+- url: /delete
+  script: /foaf.py

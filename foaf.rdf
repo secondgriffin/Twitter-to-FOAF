@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:foaf="http://xmlns.com/foaf/0.1/">
+	<foaf:Agent rdf:about="http://twitter2foaf.appspot.com/id/{{ screen_name }}">
+		<foaf:name>{{ name }}</foaf:name>
+		<rdfs:isDefinedBy rdf:resource="http://twitter2foaf.appspot.com/data/{{ screen_name }}"/>
+		<foaf:page rdf:resource="http://twitter.com/{{ screen_name }}"/>
+		{% if homepage %}<foaf:homepage rdf:resource="{{ homepage|escape }}"/>{% endif %}
+		{% if depiction %}<foaf:depiction rdf:resource="{{ depiction|escape }}"/>{% endif %}
+		{% for friend in knows %}
+		<foaf:knows>
+			<foaf:Agent rdf:about="http://twitter2foaf.appspot.com/id/{{ friend.screen_name }}">
+				<foaf:name>{{ friend.name|escape }}</foaf:name>
+				<foaf:page rdf:resource="http://twitter.com/{{ friend.screen_name }}"/>
+				{% if friend.homepage %}<foaf:homepage rdf:resource="{{ friend.homepage|escape }}"/>{% endif %}
+				{% if friend.depiction %}<foaf:depiction rdf:resource="{{ friend.depiction|escape }}"/>{% endif %}
+				<rdfs:seeAlso rdf:resource="http://twitter2foaf.appspot.com/data/{{ friend.screen_name }}"/>
+			</foaf:Agent>			
+		</foaf:knows>
+		{% endfor %}
+		{% if next_cursor %}<rdfs:seeAlso rdf:resource="http://twitter2foaf.appspot.com/data/{{ screen_name }}?cursor={{ next_cursor }}"/>{% endif %}
+	</foaf:Agent>
+</rdf:RDF>

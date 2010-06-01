@@ -1,0 +1,4 @@
+cron:
+- description: Delete entries
+  url: /delete
+  schedule: every 5 minutes

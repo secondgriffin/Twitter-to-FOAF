@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>Twitter2FOAF</title>
+  <style type="text/css">
+   /* <![CDATA[ */
+
+   html {
+    background-color: #eeeeee;
+   }
+   #wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    width: 30em;    
+   }
+   #body {
+    padding: 1em;
+    border: solid thin black;
+    background-color: white;
+    width: 100%;    
+   }
+   #body p {
+    line-height: 1.5em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+   }
+   a {
+    text-decoration: none;
+   }
+   .code {
+    font-family: monospace;
+   }
+   .note {
+    font-size: smaller;
+   }
+
+   #bottom
+   {
+    font-size: smaller;
+    color: #666;
+   }
+
+   /* ]]> */
+  </style>
+ </head>
+ <body>
+  <div id="wrapper">
+   <div id="body">
+    <h1>Twitter2FOAF</h1>
+
+    <p>You are here because a <a href="http://en.wikipedia.org/wiki/Linked_data">linked data</a> robot indexed the url <a class="code" href="http://twitter2foaf.appspot.com/id/{{ username|escape }}">http://twitter2foaf.appspot.com/id/{{ username|escape }}</a>.</p>
+
+    <p>To see the <a href="http://en.wikipedia.org/wiki/Friend_of_a_friend">FOAF</a> file for the <a href="http://twitter.com">Twitter</a> user @<a href="http://twitter.com/{{ username|escape }}">{{ username|escape }}</a>, go to <a class="code" href="http://twitter2foaf.appspot.com/data/{{ username|escape }}">http://twitter2foaf.appspot.com/data/{{ username|escape }}</a>.</p>
+
+    <p>Not sure what this is? Check out <a href="http://en.wikipedia.org">Wikipedia</a>'s entries on <a href="http://en.wikipedia.org/wiki/Friend_of_a_friend">FOAF</a> and <a href="http://en.wikipedia.org/wiki/Resource_Description_Framework">RDF</a>.
+   </div>
+   <div id="bottom">
+    <p><a href="/">Home</a> | <a href="/about">About us</a></p>
+   </div>
+  </div>
+ </body>
+</html>

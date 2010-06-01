@@ -1,0 +1,20 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+
+<http://twitter2foaf.appspot.com/id/{{ screen_name }}> a foaf:Agent;
+	foaf:name "{{ name }}";
+	rdfs:isDefinedBy <http://twitter2foaf.appspot.com/data/{{ screen_name }}>;
+	foaf:page <http://twitter.com/{{ screen_name }}>{% if homepage %};
+	foaf:homepage <{{ homepage }}>{% endif %}{% if depiction %};
+	foaf:depiction <{{ depiction }}>{% endif %}.
+{% for friend in knows %}
+<http://twitter2foaf.appspot.com/id/{{ screen_name }}> foaf:knows <http://twitter2foaf.appspot.com/id/{{ friend.screen_name }}>.
+	<http://twitter2foaf.appspot.com/id/{{ friend.screen_name }}> a foaf:Agent;
+		foaf:name "{{ friend.name }}";
+		foaf:page <http://twitter.com/{{ friend.screen_name }}>;
+		{% if friend.homepage %}foaf:homepage <{{ friend.homepage }}>;{% endif %}
+		{% if friend.depiction %}foaf:depiction <{{ friend.depiction }}>;{% endif %}
+		rdfs:seeAlso <http://twitter2foaf.appspot.com/data/{{ friend.screen_name }}>.
+{% endfor %}
+{% if next_cursor %}<http://twitter2foaf.appspot.com/id/{{ screen_name }}> rdfs:seeAlso <http://twitter2foaf.appspot.com/data/{{ screen_name }}?cursor={{ next_cursor }}>.{% endif %}
